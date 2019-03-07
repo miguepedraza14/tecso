@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Taskboard</title>
+<!-- Bootstrap Core CSS -->
+<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- MetisMenu CSS -->
+<link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+<!-- DataTables Responsive CSS -->
+<link href="../vendor/datatables-responsive/dataTables.responsive.css"
+	rel="stylesheet">
+<!-- Custom CSS -->
+<link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+<!-- Morris Charts CSS -->
+<link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+<!-- Custom Fonts -->
+<link href="../vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+	<div id="wrapper">
+		<!-- Navigation -->
+		<nav class="navbar navbar-default navbar-static-top" role="navigation"
+			style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">Taskboard</a>
+			</div>
+			<div class="navbar-default sidebar" role="navigation">
+				<div class="sidebar-nav navbar-collapse">
+					<ul class="nav" id="side-menu">
+						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
+								Dashboard</a></li>
+						<li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Titular<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="fisico.html">Persona Fisica</a>
+                                </li>
+                                <li>
+                                    <a href="juridico.html">Persona Natural</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+					</ul>
+				</div>
+				<!-- /.sidebar-collapse -->
+			</div>
+			<!-- /.navbar-static-side -->
+		</nav>
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Usuarios</h1>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+			<div class="row text-center">
+				<div class="text-left">
+					<button id="btnNuevaActividad" type="button" class="btn btn-primary btn-circle"
+						title="Nueva actividad">
+						<i class="fa fa-file-text-o"></i>
+					</button>
+				</div>
+				<br />
+				<div>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<b>Listado de Personas Fisicas</b>
+								</div>
+								<!-- /.panel-heading -->
+								<div class="panel-body">
+									<table width="100%"
+										class="table table-striped table-bordered table-hover"
+										id="activities-table">
+										<thead>
+											<tr>
+												<th class="text-center">DNI</th>
+												<th class="text-center">Nombre</th>
+												<th class="text-center">CUIT</th>
+												<th class="text-center">Opciones</th>
+											</tr>
+										</thead>
+										<tbody id="informacionFisico">
+											
+										</tbody>
+									</table>
+								</div>
+								<!-- /.panel-body -->
+							</div>
+							<!-- /.panel -->
+						</div>
+						<!-- /.col-lg-12 -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /#page-wrapper -->
+		<!-- Modal -->
+		<div class="modal fade" id="registrarPersona" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLongTitle">Registrar Persona Fisica</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		      		<div class="form-group">
+					    <label for="inputDNI">DNI</label>
+					    <input type="text" class="form-control" id="inputDNI" >
+				  	</div>
+				  	<div class="form-group">
+					    <label for="inputNombre">Nombre</label>
+					    <input type="text" class="form-control" id="inputNombre" >
+				  	</div>
+				  	<div class="form-group">
+					    <label for="inputApellido">Apellido</label>
+					    <input type="text" class="form-control" id="inputApellido" >
+				  	</div>
+				  	<div class="form-group">
+					    <label for="inputCuit">CUIT</label>
+					    <input type="text" class="form-control" id="inputCuit" >
+				  	</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+		        <button id="btnGuardar" type="button" class="btn btn-primary">Guardar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<!-- /#wrapper -->
+	<!-- jQuery -->
+	<script src="../vendor/jquery/jquery.min.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!-- Metis Menu Plugin JavaScript -->
+	<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+	<!-- Morris Charts JavaScript -->
+	<script src="../vendor/raphael/raphael.min.js"></script>
+	<!-- Custom Theme JavaScript -->
+	<script src="../dist/js/sb-admin-2.js"></script>
+	<!-- DataTables JavaScript -->
+	<script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+	<script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#activities-table').DataTable({
+				"responsive" : "true",
+				"sProcessing":     "Procesando...",
+				"sLengthMenu":     "Mostrar _MENU_ registros",
+				"sZeroRecords":    "No se encontraron resultados",
+				"sEmptyTable":     "Ningún dato disponible en esta tabla",
+				"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+				"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+				"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+				"sInfoPostFix":    "",
+				"sSearch":         "Buscar:",
+				"sUrl":            "",
+				"sInfoThousands":  ",",
+				"sLoadingRecords": "Cargando...",
+				"oPaginate": {
+					"sFirst":    "Primero",
+					"sLast":     "Último",
+					"sNext":     "Siguiente",
+					"sPrevious": "Anterior"
+				},
+				"oAria": {
+					"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+					"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+				}
+			});
+			
+			function dibujarTabla(result){
+				$('#informacionFisico').html("");
+				var data = result;
+				var bodyTable = "";
+				for(var i = 0; i < data.length; i++) {
+					bodyTable += "<tr id="+ data[i].id +">";
+					bodyTable += "<td>";
+					bodyTable += data[i].dni;    
+					bodyTable += "</td>";
+					bodyTable += "<td>";
+					bodyTable += data[i].nombre + " " + data[i].apellido;     
+					bodyTable += "</td>";
+					bodyTable += "<td>";
+					bodyTable += data[i].cuit;    
+					bodyTable += "</td>";
+					bodyTable += "<td class=\"center\">";
+					bodyTable += "<button title=\"Editar titular\" type=\"button\" name=\"btnEdit\" version="+ + data[i].versionNumber +" id="+ data[i].id +" class=\"btn btn-success btn-circle\">";
+					bodyTable += "<i class=\"fa fa-pencil-square-o\"></i>";
+					bodyTable += "</button>";
+					bodyTable += "<button title=\"Eliminar titular\" type=\"button\" name=\"btnDelete\" version="+ + data[i].versionNumber +" id="+ data[i].id +" class=\"btn btn-danger btn-circle\">";
+					bodyTable += "<i class=\"fa fa-times\"></i>";
+					bodyTable += "</button>";
+					bodyTable += "</td>";
+					bodyTable += "</tr>";
+				}
+				$('#informacionFisico').html(bodyTable);
+			};
+			
+			function listar(){
+				$.getJSON("http://localhost:8081/api/PhysicalOwner/findAll", function(result){
+					dibujarTabla(result);
+					$("button[name=btnDelete]").each(function(){
+						console.log(this);
+						$(this).on( "click", function() {
+							var id = this.id;
+							var aux = "#" + id;
+							var version = $(this).attr("version");
+							var url = "http://localhost:8081/api/PhysicalOwner/delete/"+id+"/"+version;
+							$.get(url,function(data) {
+								$.getJSON("http://localhost:8081/api/PhysicalOwner/findAll", function(result){
+									$(aux).remove();
+								});	
+							});
+						});
+					});
+				});
+			};
+			
+			function guardar(){
+				var dni = $('#inputDNI').val();
+				var nombre = $('#inputNombre').val();;
+				var apellidos = $('#inputApellido').val();
+				var cuit = $('#inputCuit').val();
+				$.post("http://localhost:8081/api/PhysicalOwner/save/"+dni+"/"+nombre+"/"+apellidos+"/"+cuit, function(result){
+					$('#registrarPersona').modal('hide');
+					dibujarTabla(result);
+				});
+			};
+			
+			$("#btnGuardar").on( "click", function() {
+				guardar();
+			});
+			
+			listar();
+			$("#btnNuevaActividad").on("click", function() {
+				$('#registrarPersona').modal();
+			});
+			
+		});
+	</script>
+</body>
+</html>
